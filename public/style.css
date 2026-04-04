@@ -1196,7 +1196,7 @@ body {
   position: fixed;
   bottom: calc(18px + var(--safe-bottom));
   right: 14px;
-  width: 54px;
+  width: 70px;
   height: 54px;
   border-radius: 50%;
   background: rgba(0,0,0,0.55);
