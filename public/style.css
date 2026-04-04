@@ -1188,3 +1188,42 @@ body {
     color: var(--accent) !important;
   }
 }
+
+/* ══════════════════════════════════════════════
+   GATITO FLOTANTE — volver al inicio
+══════════════════════════════════════════════ */
+.btn-home-cat {
+  position: fixed;
+  bottom: calc(18px + var(--safe-bottom));
+  right: 14px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  border: 2px solid rgba(255,255,255,0.12);
+  padding: 5px;
+  cursor: pointer;
+  z-index: 998;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s, border-color 0.15s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.btn-home-cat img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.btn-home-cat:active {
+  transform: scale(0.88);
+}
+
+/* Ocultarlo en el menú principal */
+#screen-menu.active ~ .btn-home-cat {
+  display: none;
+}
