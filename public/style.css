@@ -1293,6 +1293,56 @@ body {
 #screen-agegate.active ~ .btn-home-cat { display: none; }
 
 /* ══════════════════════════════════════════════
+   FOOTER DEL MENÚ
+══════════════════════════════════════════════ */
+.menu-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 0 calc(20px + var(--safe-bottom));
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin-top: 8px;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.footer-item:active { color: var(--accent); }
+
+.footer-icon { font-size: 0.95rem; }
+
+.footer-item-discord {
+  color: rgba(114, 137, 218, 0.7);
+}
+.footer-item-discord:active { color: #7289da; }
+
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.25);
+  margin-top: 4px;
+}
+.footer-legal a {
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-legal a:active { color: var(--accent); }
+.footer-legal span { color: rgba(255,255,255,0.15); }
+
+/* ══════════════════════════════════════════════
    GATITO FLOTANTE — volver al inicio
 ══════════════════════════════════════════════ */
 .btn-home-cat {
