@@ -1197,7 +1197,7 @@ body {
   bottom: calc(18px + var(--safe-bottom));
   right: 14px;
   width: 70px;
-  height: 54px;
+  height: 70px;
   border-radius: 50%;
   background: rgba(0,0,0,0.55);
   border: 2px solid rgba(255,255,255,0.12);
