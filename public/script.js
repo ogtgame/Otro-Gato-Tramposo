@@ -5,6 +5,16 @@
 
 const socket = io();
 
+// ── Age Gate ──────────────────────────────────
+function enterSite() {
+  try { localStorage.setItem('ogt_age_ok', '1'); } catch(e) {}
+  showScreen('screen-menu');
+}
+
+function exitSite() {
+  window.location.href = 'https://www.google.com';
+}
+
 // ── Estado ────────────────────────────────────
 let state = {
   roomCode:    null,
@@ -727,6 +737,13 @@ socket.on('reconnect', () => {
 
 // ── Init ──────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  // Si ya aceptó la edad antes, saltar el agegate
+  try {
+    if (localStorage.getItem('ogt_age_ok') === '1') {
+      showScreen('screen-menu');
+    }
+  } catch(e) {}
+
   checkURLForRoom();
 
   // Enter key en inputs
