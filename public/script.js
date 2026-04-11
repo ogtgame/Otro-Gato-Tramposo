@@ -22,6 +22,7 @@ let state = {
   playerName:  null,
   targetScore: 5,
   maxPlayers:  6,
+  expansions:  [],
   gameState:   null,
 };
 
@@ -195,6 +196,24 @@ function selectOption(btn, group) {
   if (group === 'max-players')  state.maxPlayers  = parseInt(btn.dataset.value);
 }
 
+// ── Expansiones ───────────────────────────────
+function toggleExpansion(id) {
+  const idx    = state.expansions.indexOf(id);
+  const card   = document.getElementById(`exp-card-${id}`);
+  const toggle = document.getElementById(`exp-toggle-${id}`);
+  if (idx !== -1) {
+    state.expansions.splice(idx, 1);
+    card.classList.remove('active');
+    toggle.classList.remove('active');
+    toggle.textContent = 'Activar';
+  } else {
+    state.expansions.push(id);
+    card.classList.add('active');
+    toggle.classList.add('active');
+    toggle.textContent = 'Activado ✓';
+  }
+}
+
 // ── Toast ─────────────────────────────────────
 let toastTimer = null;
 function showToast(msg, type = '') {
@@ -215,6 +234,7 @@ function createRoom() {
     playerName:  name,
     targetScore: state.targetScore,
     maxPlayers:  state.maxPlayers,
+    expansions:  state.expansions,
   });
 }
 
