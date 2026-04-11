@@ -162,7 +162,48 @@
         <button class="option-btn" data-value="8" onclick="selectOption(this, 'max-players')">8</button>
       </div>
     </div>
+<div class="form-group">
+      <label>Expansiones</label>
+      <div class="expansions-list">
 
+        <div class="expansion-card" id="exp-card-1">
+          <div class="expansion-info">
+            <div class="expansion-emoji">👺</div>
+            <div class="expansion-text">
+              <div class="expansion-name">No se habla de política</div>
+              <div class="expansion-count">15 negras · 35 blancas</div>
+            </div>
+          </div>
+          <button class="expansion-toggle" id="exp-toggle-1" onclick="toggleExpansion(1)">
+            Activar
+          </button>
+        </div>
+
+        <div class="expansion-card" id="exp-card-2">
+          <div class="expansion-info">
+            <div class="expansion-emoji">😏</div>
+            <div class="expansion-text">
+              <div class="expansion-name">El que escoge no coge</div>
+              <div class="expansion-count">15 negras · 35 blancas</div>
+            </div>
+          </div>
+          <button class="expansion-toggle" id="exp-toggle-2" onclick="toggleExpansion(2)">
+            Activar
+          </button>
+        </div>
+
+        <div class="expansion-card" id="exp-card-3">
+          <div class="expansion-info">
+            <div class="expansion-emoji">⛪</div>
+            <div class="expansion-text">
+              <div class="expansion-name">En el nombre del padre</div>
+              <div class="expansion-count">15 negras · 35 blancas</div>
+            </div>
+          </div>
+          <button class="expansion-toggle" id="exp-toggle-3" onclick="toggleExpansion(3)">
+            Activar
+          </button>
+        </div>
     <button class="btn btn-primary btn-lg" onclick="createRoom()">🚀 Crear Sala</button>
   </div>
 </div>
