@@ -544,40 +544,6 @@ const WHITE_CARDS = [
   "La muerte",
 ];
 
-// ── Expansiones ──────────────────────────────────────────────────────────────
-
-// ══════ EXPANSIÓN 1: NO SE HABLA DE POLÍTICA 👺 ══════
-const EXP1_BLACK = [
-  // PEGÁ ACÁ TUS 15 CARTAS NEGRAS
-  // Ejemplo: "El próximo presidente va a resolver todo con __________",
-];
-const EXP1_WHITE = [
-  // PEGÁ ACÁ TUS 35 CARTAS BLANCAS
-  // Ejemplo: "Un decreto de necesidad y urgencia",
-];
-
-// ══════ EXPANSIÓN 2: EL QUE ESCOGE NO COGE 😏 ══════
-const EXP2_BLACK = [
-  // PEGÁ ACÁ TUS 15 CARTAS NEGRAS
-];
-const EXP2_WHITE = [
-  // PEGÁ ACÁ TUS 35 CARTAS BLANCAS
-];
-
-// ══════ EXPANSIÓN 3: EN EL NOMBRE DEL PADRE ⛪ ══════
-const EXP3_BLACK = [
-  // PEGÁ ACÁ TUS 15 CARTAS NEGRAS
-];
-const EXP3_WHITE = [
-  // PEGÁ ACÁ TUS 35 CARTAS BLANCAS
-];
-
-const EXPANSIONS = {
-  1: { black: EXP1_BLACK, white: EXP1_WHITE },
-  2: { black: EXP2_BLACK, white: EXP2_WHITE },
-  3: { black: EXP3_BLACK, white: EXP3_WHITE },
-};
-
 // ── Estado de salas ──────────────────────────────────────────────────────────
 const rooms = {};
 const TURN_TIMEOUT = 60; // segundos
@@ -599,43 +565,26 @@ function countBlanks(text) {
   return (text.match(/__________/g) || []).length;
 }
 
-function buildDecks(expansions) {
-  let blacks = [...BLACK_CARDS];
-  let whites = [...WHITE_CARDS];
-  if (Array.isArray(expansions)) {
-    expansions.forEach(id => {
-      const exp = EXPANSIONS[id];
-      if (exp) {
-        blacks = blacks.concat(exp.black.filter(c => c));
-        whites = whites.concat(exp.white.filter(c => c));
-      }
-    });
-  }
-  return { blacks: shuffle(blacks), whites: shuffle(whites) };
-}
-
-function createRoom(hostId, hostName, targetScore, maxPlayers, expansions) {
+function createRoom(hostId, hostName, targetScore, maxPlayers) {
   const code = generateRoomCode();
-  const { blacks, whites } = buildDecks(expansions);
   rooms[code] = {
     code,
     phase: 'lobby',
     hostId,
     players: [{ id: hostId, name: hostName, score: 0, hand: [], isJudge: false }],
-    blackDeck: blacks,
-    whiteDeck: whites,
+    blackDeck: shuffle(BLACK_CARDS),
+    whiteDeck: shuffle(WHITE_CARDS),
     currentBlackCard: null,
     submissions: [],
     shuffledSubmissions: [],
     roundWinner: null,
     targetScore: targetScore || 7,
     maxPlayers: maxPlayers || 8,
-    expansions: expansions || [],
     judgeIndex: 0,
     roundNumber: 0,
     disconnectedPlayers: {},
-    turnTimer: null,
-    turnStartedAt: null,
+    turnTimer: null,       // referencia al setTimeout del timer
+    turnStartedAt: null,   // timestamp para calcular tiempo restante
   };
   return code;
 }
@@ -809,7 +758,7 @@ function broadcastState(room) {
 io.on('connection', (socket) => {
   console.log('Connected:', socket.id);
 
-  socket.on('create_room', ({ playerName, targetScore, maxPlayers, expansions }) => {
+  socket.on('create_room', ({ playerName, targetScore, maxPlayers }) => {
     if (!playerName || !playerName.trim()) {
       return socket.emit('error', { message: 'Nombre inválido' });
     }
@@ -817,8 +766,7 @@ io.on('connection', (socket) => {
       socket.id,
       playerName.trim(),
       targetScore,
-      maxPlayers,
-      expansions
+      maxPlayers
     );
     socket.join(code);
     socket.emit('room_created', { code });
@@ -955,11 +903,10 @@ io.on('connection', (socket) => {
     const room = getRoom(roomCode);
     if (!room || room.hostId !== socket.id) return;
     clearTurnTimer(room);
-    const { blacks, whites } = buildDecks(room.expansions);
     room.phase = 'lobby';
     room.players.forEach(p => { p.score = 0; p.hand = []; p.isJudge = false; });
-    room.blackDeck = blacks;
-    room.whiteDeck = whites;
+    room.blackDeck = shuffle(BLACK_CARDS);
+    room.whiteDeck = shuffle(WHITE_CARDS);
     room.currentBlackCard = null;
     room.submissions = [];
     room.shuffledSubmissions = [];
@@ -997,7 +944,7 @@ io.on('connection', (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`O.G.T. server corriendo en puerto ${PORT}`);
 });
