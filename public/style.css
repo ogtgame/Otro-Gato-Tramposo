@@ -1190,6 +1190,87 @@ body {
 }
 
 /* ══════════════════════════════════════════════
+   EXPANSIONES
+══════════════════════════════════════════════ */
+.expansions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.expansion-card {
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.expansion-card.active {
+  border-color: var(--accent);
+  background: rgba(245,166,35,0.08);
+}
+
+.expansion-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.expansion-emoji {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.expansion-text {
+  min-width: 0;
+}
+
+.expansion-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expansion-count {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.expansion-toggle {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  transition: all 0.2s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 38px;
+  min-width: 80px;
+}
+
+.expansion-toggle.active {
+  background: var(--accent-grad);
+  border-color: transparent;
+  color: #000;
+}
+
+/* ══════════════════════════════════════════════
    AGE GATE — verificación de edad
 ══════════════════════════════════════════════ */
 #screen-agegate {
