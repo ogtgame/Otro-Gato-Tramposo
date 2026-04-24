@@ -990,6 +990,40 @@ io.on('connection', (socket) => {
       } else {
         // Guardar como desconectado para reconexión
         room.disconnectedPlayers[player.name] = socket.id;
+
+        // Bug 3 fix: si se desconecta durante playing sin haber enviado carta,
+        // verificar si los demás jugadores conectados ya submitieron para no trabar el juego
+        if (room.phase === 'playing') {
+          const connectedNonJudge = room.players.filter(p =>
+            !p.isJudge && !room.disconnectedPlayers[p.name]
+          );
+          const allConnectedSubmitted = connectedNonJudge.length > 0 &&
+            connectedNonJudge.every(p => room.submissions.find(s => s.playerId === p.id));
+
+          if (allConnectedSubmitted) {
+            // Auto-submitir carta al desconectado y pasar a judging
+            if (!room.submissions.find(s => s.playerId === player.id) && player.hand.length > 0) {
+              const blanks = room.currentBlackCard.blanks;
+              const cards = [];
+              const handCopy = [...player.hand];
+              for (let i = 0; i < blanks && handCopy.length > 0; i++) {
+                const idx = Math.floor(Math.random() * handCopy.length);
+                cards.push(handCopy.splice(idx, 1)[0]);
+              }
+              cards.forEach(card => {
+                const idx = player.hand.indexOf(card);
+                if (idx !== -1) player.hand.splice(idx, 1);
+              });
+              room.submissions.push({ playerId: player.id, playerName: player.name, cards, autoSubmitted: true });
+            }
+            room.shuffledSubmissions = shuffle(
+              room.submissions.map((s, i) => ({ id: i, cards: s.cards }))
+            );
+            room.phase = 'judging';
+            startTurnTimer(room);
+          }
+        }
+
         broadcastState(room);
       }
       break;
