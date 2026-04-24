@@ -27,6 +27,7 @@ let state = {
 };
 
 let selectedCards = [];
+let lastRoundNumber = 0;
 
 // ── Sonidos con Web Audio API ─────────────────
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -378,7 +379,11 @@ function renderGame(gs) {
     judgingArea.classList.remove('hidden');
     handArea.classList.add('hidden');
     judgeWait.classList.add('hidden');
-    stopTimerBar();
+
+    // Bug 4 fix: mostrar timer para el juez también (antes se llamaba stopTimerBar aquí)
+    if (lastPhase !== 'judging') {
+      startTimerBar(gs.timerSecondsLeft || 60);
+    }
 
     const submList = document.getElementById('submissions-list');
     submList.innerHTML = '';
@@ -421,7 +426,9 @@ function renderGame(gs) {
     if (lastPhase !== 'playing' && !gs.isJudge) {
       vibrate([80]);
       playSound('myturn');
-      startTimerBar(60);
+      // Bug 1 fix: usar timerSecondsLeft del servidor (no 60 hardcodeado)
+      // Así si alguien se reconecta con 20s restantes, el timer es correcto
+      startTimerBar(gs.timerSecondsLeft || 60);
     }
 
     renderHand(gs);
@@ -664,6 +671,12 @@ function handleGameState(gs) {
   state.gameState = gs;
   state.roomCode  = gs.code;
   saveSession();
+
+  // Bug 2 fix: limpiar cartas seleccionadas cuando empieza una nueva ronda
+  if (gs.roundNumber && gs.roundNumber !== lastRoundNumber) {
+    selectedCards = [];
+    lastRoundNumber = gs.roundNumber;
+  }
 
   switch (gs.phase) {
     case 'lobby':
