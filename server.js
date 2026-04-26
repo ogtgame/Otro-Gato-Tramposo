@@ -564,7 +564,6 @@ const EXP1_BLACK = [
 "El nuevo ministerio de Milei se va a llamar Ministerio de __________."
 "Lo que más bronca le da a un peronista es __________."
 "La frase que define la política argentina es __________."
-
   // Ejemplo: "El próximo presidente va a resolver todo con __________",
 ];
 const EXP1_WHITE = [
@@ -626,7 +625,6 @@ const EXP2_BLACK = [
 "Lo que toda pareja prueba una vez y se arrepiente es __________."
 "La categoría más vista en Pornhub es __________."
 "El peor error que podés cometer en la cama es __________."
-
 ];
 const EXP2_WHITE = [
   // PEGÁ ACÁ TUS 35 CARTAS BLANCAS
@@ -665,7 +663,6 @@ const EXP2_WHITE = [
 "La actriz que se enamora del actor"
 "Un creampie que sale mal"
 "Usar el consolador de la abuela"
-
 ];
 
 // ══════ EXPANSIÓN 3: EN EL NOMBRE DEL PADRE ⛪ ══════
@@ -686,7 +683,6 @@ const EXP3_BLACK = [
 "Lo que más le gusta a un rabino es __________."
 "El verdadero poder del rosario es __________."
 "El verdadero infierno es __________."
-
 ];
 const EXP3_WHITE = [
   // PEGÁ ACÁ TUS 35 CARTAS BLANCAS
@@ -725,7 +721,6 @@ const EXP3_WHITE = [
 "El arcángel Gabriel con gorra"
 "Un judío ortodoxo en la playa"
 "El diluvio pero con fernet"
-
 ];
 
 const EXPANSIONS = {
