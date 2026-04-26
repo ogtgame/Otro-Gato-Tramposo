@@ -549,10 +549,62 @@ const WHITE_CARDS = [
 // ══════ EXPANSIÓN 1: NO SE HABLA DE POLÍTICA 👺 ══════
 const EXP1_BLACK = [
   // PEGÁ ACÁ TUS 15 CARTAS NEGRAS
+  "A Milei no hay mina que le guste más que __________."
+"Cristina dijo que __________ era parte de la proyección."
+"Lo peor que le puede pasar a un militante es __________."
+"Macri prometió que con Cambiemos se terminaba __________."
+"Según Massa, la inflación se resuelve con __________."
+"Bullrich gritó '¡vamos por todo!' y terminó __________."
+"Milei juró por Dios, la Patria y __________."
+"El verdadero plan de Larreta era __________."
+"Bregman se puso seria y dijo que __________ era fascismo."
+"El momento más incómodo de una mesa familiar es cuando sale el tema __________."
+"La verdadera razón por la que perdimos las elecciones fue __________."
+"Lo que realmente mueve al peronismo es __________."
+"El nuevo ministerio de Milei se va a llamar Ministerio de __________."
+"Lo que más bronca le da a un peronista es __________."
+"La frase que define la política argentina es __________."
+
   // Ejemplo: "El próximo presidente va a resolver todo con __________",
 ];
 const EXP1_WHITE = [
   // PEGÁ ACÁ TUS 35 CARTAS BLANCAS
+  "Su hermana"
+"Bregman"
+"Un dólar a $1800"
+"La valija de Antonini Wilson"
+"El helicóptero"
+"La Cámpora"
+"Un plan platita"
+"Llamar 'gorila' a tu suegro"
+"La grieta"
+"Un avión lleno de militantes"
+"Cambiar de partido como de calzoncillo"
+"La foto con el Papa"
+"Un tarifazo disfrazado de 'alivio'"
+"El 'no me callo nada'"
+"Un ministerio nuevo cada semana"
+"La inflación del 300%"
+"Un ajuste que no es ajuste"
+"Un piquete con choripán"
+"La Lapidación mediática"
+"Un dólar soja"
+"El 'yo no soy como los otros'"
+"La militancia rentada"
+"La herencia recibida"
+"Un aumento de dieta para diputados"
+"Gritar '¡facho!' en una marcha"
+"El 'capitalismo de amigos'"
+"Una foto con Cristina en el balcón"
+"El 'voto bronca'"
+"Un impuesto nuevo para los que laburan"
+"La culpa de los medios"
+"Hacer cadena nacional a las 3 AM"
+"Un choripán con guita adentro"
+"Gritar '¡viva Perón!' en un velorio"
+"El famoso 'vamos a estar mejor'"
+"Un discurso de 4 horas sin decir nada"
+
   // Ejemplo: "Un decreto de necesidad y urgencia",
 ];
 
